@@ -2,15 +2,21 @@
     <div class="container">
         <a class="navbar-brand" href="#">Rosy App</a>
 
-        <ul *ngIf="authService.currentUser$ | async" class="navbar-nav mr-auto" >
+        <ul class="navbar-nav mr-auto" >
+            <ng-container *ngIf="authService.currentUser$ | async">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+                </li>
+
+            </ng-container>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/members" routerLinkActive="active">Matches</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/lists" routerLinkActive="active">Lists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/messages" routerLinkActive="active">Messages</a>
+                <a class="nav-link" routerLink="/errors" routerLinkActive="active">Errors</a>
             </li>
         </ul>
 
@@ -23,7 +29,7 @@
             </div>
         </div>
 
-        <form *ngIf="(authService.currentUser$ | async) === null" #loginForm="ngForm" (ngSubmit)="loginTest()" class="form-inline mt-2 mt-md-0"  
+        <form *ngIf="(authService.currentUser$ | async) === null" #loginForm="ngForm" (ngSubmit)="login()" class="form-inline mt-2 mt-md-0"  
             autocomplete="off">
             <input 
                 name="username"

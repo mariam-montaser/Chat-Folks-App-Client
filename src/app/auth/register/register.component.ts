@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   @Output() cancelRegister = new EventEmitter();
   model: RegisterModel= {username: '', password: ''};
-
+  validationErrors: string[] = [];
   constructor(private authService: AuthService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       console.log(response); 
     }, error => {
       console.log(error);
-      this.toastr.error(error.error);
+      this.validationErrors= error;
     })
   }
 
