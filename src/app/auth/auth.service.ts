@@ -47,6 +47,13 @@ export class AuthService {
     )
   }
 
+  loginTest(user: LoginModel){
+    if(user){
+      localStorage.setItem('user', JSON.stringify(user));
+      this.currentUserSource.next({username: user.username});
+    }
+  }
+
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
