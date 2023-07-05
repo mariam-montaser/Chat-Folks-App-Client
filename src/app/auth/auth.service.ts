@@ -3,16 +3,22 @@ import { Injectable } from '@angular/core';
 import {map} from 'rxjs/operators';
 import {User} from '../models/user';
 import { ReplaySubject } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 
 export interface LoginModel{
-  username: String; 
-  password: String
+  username: string; 
+  password: string
 }
 
 export interface RegisterModel{
-  username: String; 
-  password: String
+  gender: string; 
+  username: string; 
+  knownAs: string; 
+  city: string; 
+  country: string; 
+  dateOfBirth: string; 
+  password: string
 }
 
 
@@ -20,7 +26,7 @@ export interface RegisterModel{
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = 'http://localhost:5000/api';
+  baseUrl = environment.apiUrl;
   currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
@@ -40,6 +46,8 @@ export class AuthService {
     console.log(user)
     return this.http.post<User>(`${this.baseUrl}/accounts/login`, user).pipe(
       map(user => {
+        console.log(user);
+        
         if(user){
           this.storeUserData(user);
         }
@@ -50,7 +58,7 @@ export class AuthService {
   loginTest(user: LoginModel){
     if(user){
       localStorage.setItem('user', JSON.stringify(user));
-      this.currentUserSource.next({username: user.username});
+      // this.currentUserSource.next({username: user.username});
     }
   }
 
