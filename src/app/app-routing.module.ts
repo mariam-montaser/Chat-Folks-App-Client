@@ -10,7 +10,9 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { MemberDetailedResolverResolver } from './members/member-detailed-resolver.resolver';
+import { MemberDetailedResolver } from './members/member-detailed.resolver';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -20,10 +22,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: 'members', component: MembersComponent},
-      {path: 'members/:username', component: MemberDetailsComponent, resolve: {member: MemberDetailedResolverResolver}},
+      {path: 'members/:username', component: MemberDetailsComponent, resolve: {member: MemberDetailedResolver}},
       {path: 'member/edit', component: MemberEditComponent},
       {path: 'lists', component: ListsComponent},
       {path: 'messages', component: MessagesComponent},
+      {path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard]},
     ]
   },
   {path: 'errors', component: TestErrorsComponent},

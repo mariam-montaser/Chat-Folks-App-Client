@@ -11,8 +11,8 @@ import { Message } from 'src/app/models/message';
 export class MemberMessagesComponent implements OnInit {
   @ViewChild('messageForm') messageForm: NgForm;
 
-  @Input() messages:Message[] = [];
-  @Input() username: string = '';
+  @Input() messages:Message[];
+  @Input() username: string;
 
   messageContent: string;
 

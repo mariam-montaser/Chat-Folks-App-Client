@@ -11,7 +11,7 @@ import { MembersService } from './members.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MemberDetailedResolverResolver implements Resolve<Member> {
+export class MemberDetailedResolver implements Resolve<Member> {
 
   constructor(private memberService: MembersService){}
 

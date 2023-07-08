@@ -49,17 +49,10 @@ export class AuthService {
         console.log(user);
         
         if(user){
-          this.storeUserData(user);
+          this.setCurrentUser(user);
         }
       })
     )
-  }
-
-  loginTest(user: LoginModel){
-    if(user){
-      localStorage.setItem('user', JSON.stringify(user));
-      // this.currentUserSource.next({username: user.username});
-    }
   }
 
   logout(){
@@ -68,11 +61,23 @@ export class AuthService {
   }
 
   setCurrentUser(user: User) {
-    this.currentUserSource.next(user);
+    user.roles = [];
+    const roles = this.getDecodedToken(user.token).role;
+    Array.isArray(roles)? user.roles = roles : user.roles.push(roles);
+    console.log("user Role:------------------");
+    console.log(user);
+    console.log(user.roles);
+    
+    this.storeUserData(user);
+
   }
 
   private storeUserData(user: User){
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+  }
+
+  private getDecodedToken(token){
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }

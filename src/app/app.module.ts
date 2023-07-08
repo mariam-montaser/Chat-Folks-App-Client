@@ -21,6 +21,7 @@ import { MembersModule } from './members/members.module';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
 import { ListsModule } from './lists/lists.module';
 import { MessagesModule } from './messages/messages.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { MessagesModule } from './messages/messages.module';
     HomepageComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    TestErrorsComponent
+    TestErrorsComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +41,7 @@ import { MessagesModule } from './messages/messages.module';
     AuthModule,
     SharedModule,
     MembersModule,
+    AdminModule,
     ListsModule,
     MessagesModule,
     NgxSpinnerModule

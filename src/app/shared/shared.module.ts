@@ -9,16 +9,19 @@ import { InputComponent } from './input/input.component';
 import { InputDateComponent } from './input-date/input-date.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TimeagoModule } from 'ngx-timeago';
+import { HasRoleDirective } from './has-role.directive';
 
 
 
 @NgModule({
   declarations: [
     InputComponent,
-    InputDateComponent
+    InputDateComponent,
+    HasRoleDirective
   ],
   imports: [
     CommonModule,
@@ -30,6 +33,7 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
     TimeagoModule.forRoot(),
+    ModalModule.forRoot(),
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     })
@@ -43,8 +47,10 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule,
     ButtonsModule,
     TimeagoModule,
+    ModalModule,
     InputComponent,
-    InputDateComponent
+    InputDateComponent,
+    HasRoleDirective
   ]
 })
 export class SharedModule { }
