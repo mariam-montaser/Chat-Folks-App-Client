@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import {of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import {Member} from '../models/member';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../models/user';
