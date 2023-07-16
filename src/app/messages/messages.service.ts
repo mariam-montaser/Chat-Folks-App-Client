@@ -27,7 +27,9 @@ export class MessagesService {
 
 
   createConnectionHub(user: User, otherUsername:string){
-    this.hubConnection =  new HubConnectionBuilder().withUrl(`${this.hubUrl}/messages?user=${otherUsername}`).withAutomaticReconnect().build();
+    this.hubConnection =  new HubConnectionBuilder().withUrl(`${this.hubUrl}/messages?user=${otherUsername}`,{
+      accessTokenFactory: () => user.token
+    }).withAutomaticReconnect().build();
 
     this.hubConnection.start().catch(error => console.log(error));
 

@@ -20,11 +20,11 @@ export class PresenceService {
   constructor(private toastr:ToastrService, private router: Router) { }
 
   createHubConnection(user: User){
-    this.hubConnection = new HubConnectionBuilder().withUrl(`${this.hubConnection}/presence`, {
+    this.hubConnection = new HubConnectionBuilder().withUrl(`${this.hubUrl}/presence`, {
       accessTokenFactory: () => user.token
     }).withAutomaticReconnect().build();
 
-    this.hubConnection.start().catch(error => console.log(error));
+    this.hubConnection.start().catch(error => console.log('Error from hub:  ',error));
 
     this.hubConnection.on('UserIsOnline', username => {
       this.onlineUsers$.pipe(take(1)).subscribe(usernames => {

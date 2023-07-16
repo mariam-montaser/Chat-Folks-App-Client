@@ -47,12 +47,12 @@ export class AuthService {
   login(user: LoginModel){
     console.log(user)
     return this.http.post<User>(`${this.baseUrl}/accounts/login`, user).pipe(
-      map(user => {
-        console.log(user);
-        
+      map(user => {        
         if(user){
           this.setCurrentUser(user);
           this.presenceService.createHubConnection(user);
+          console.log('connection start');
+          
         }
       })
     )
@@ -68,9 +68,6 @@ export class AuthService {
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
     Array.isArray(roles)? user.roles = roles : user.roles.push(roles);
-    console.log("user Role:------------------");
-    console.log(user);
-    console.log(user.roles);
     
     this.storeUserData(user);
 
